@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <div id="my-element"></div>
+        <script>var notebook = RunKit.createNotebook({
+            // the parent element for the new notebook
+            element: document.getElementById("my-element"),
+            // specify the source of the notebook
+            source: "const { create, all, factory } = require('mathjs')\n\n// First let's see what the default behavior is:\n// strings are compared by their numerical value\nconsole.log('default (compare string by their numerical value)')\nconst { evaluate } = create(all)\nevaluateAndLog(evaluate, '2 < 10') // true\nevaluateAndLog(evaluate, '\"2\" < \"10\"') // true\nevaluateAndLog(evaluate, '\"a\" == \"b\"') // Error: Cannot convert \"a\" to a number\nevaluateAndLog(evaluate, '\"a\" == \"a\"') // Error: Cannot convert \"a\" to a number\nconsole.log('')\n\n// Suppose we want different behavior for string comparisons. To achieve\n// this we can replace the factory functions for all relational functions\n// with our own. In this simple example we use the JavaScript implementation.\nconsole.log('custom (compare strings lexically)')\n\nconst allWithCustomFunctions = {\n  ...all,\n\n  createEqual: factory('equal', [], () => function equal (a, b) {\n    return a === b\n  }),\n\n  createUnequal: factory('unequal', [], () => function unequal (a, b) {\n    return a !== b\n  }),\n\n  createSmaller: factory('smaller', [], () => function smaller (a, b) {\n    return a < b\n  }),\n\n  createSmallerEq: factory('smallerEq', [], () => function smallerEq (a, b) {\n    return a <= b\n  }),\n\n  createLarger: factory('larger', [], () => function larger (a, b) {\n    return a > b\n  }),\n\n  createLargerEq: factory('largerEq', [], () => function largerEq (a, b) {\n    return a >= b\n  }),\n\n  createCompare: factory('compare', [], () => function compare (a, b) {\n    return a > b ? 1 : a < b ? -1 : 0\n  })\n}\nconst evaluateCustom = create(allWithCustomFunctions).evaluate\nevaluateAndLog(evaluateCustom, '2 < 10') // true\nevaluateAndLog(evaluateCustom, '\"2\" < \"10\"') // false\nevaluateAndLog(evaluateCustom, '\"a\" == \"b\"') // false\nevaluateAndLog(evaluateCustom, '\"a\" == \"a\"') // true\n\n// helper function to evaluate an expression and print the results\nfunction evaluateAndLog (evaluate, expression) {\n  try {\n    console.log(expression, evaluate(expression))\n  } catch (err) {\n    console.error(expression, err.toString())\n  }\n}\n"
+        })</script>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <div id="custom-datatype-js"></div>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("custom-datatype-js"),
+    // specify the source of the notebook
+    source: "const {\n  create,\n  fractionDependencies,\n  addDependencies,\n  divideDependencies,\n  formatDependencies\n} = require('mathjs')\n\nconst config = {\n  // optionally, you can specify configuration\n}\n\n// Create just the functions we need\nconst { fraction, add, divide, format } = create({\n  fractionDependencies,\n  addDependencies,\n  divideDependencies,\n  formatDependencies\n}, config)\n\n// Use the created functions\nconst a = fraction(1, 3)\nconst b = fraction(3, 7)\nconst c = add(a, b)\nconst d = divide(a, b)\nconsole.log('c =', format(c)) // outputs \"c = 16/21\"\nconsole.log('d =', format(d)) // outputs \"d = 7/9\"\n\n// Now, when bundling your application for use in the browser, only the used\n// parts of math.js will be bundled. For example to create a bundle using Webpack:\n//\n//     npx webpack-cli ./custom_loading.mjs --output-path custom_loading_bundle --mode=production\n//\n// Read more about what bundle sizes you can expect here:\n//\n//     https://mathjs.org/docs/custom_bundling.html\n"
+})</script>
+    </body>
+</html>
