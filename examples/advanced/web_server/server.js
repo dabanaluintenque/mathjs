@@ -53,6 +53,38 @@ app.get('/mathjs', function (req, res) {
     })
 })
 
+app.get('/convert_fraction_to_bignumber.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '../convert_fraction_to_bignumber.js.html'));
+})
+
+app.get('/custom_argument_parsing.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '../custom_argument_parsing.js.html'));
+})
+
+app.get('/custom_datatype.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '../custom_datatype.js.html'));
+})
+
+app.get('/custom_evaluate_using_import.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '../custom_evaluate_using_import.js.html'));
+});
+
+app.get('/custom_evaluate_using_factories.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '../custom_evaluate_using_factories.js.html'));
+})
+
+app.get('/custom_relational_functions.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '../custom_relational_functions.js.html'));
+})
+
+app.get('/custom_loading.mjs.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '../custom_loading.mjs.html'));
+})
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '../index.html'));
+})
+
 /**
  * Format error messages as string
  * @param {Error} err
