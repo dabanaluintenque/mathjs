@@ -8,7 +8,6 @@ const firefox = require('selenium-webdriver/firefox');
 const { time } = require('console');
 
 const service = new firefox.ServiceBuilder('./geckodriver');
-//const driver = new Builder().forBrowser('firefox').setFirefoxService(service).build();
 const options = new firefox.Options();
 
 suite(function (env) {
@@ -23,7 +22,7 @@ suite(function (env) {
             await driver.quit()
         });
 
-        it('Selenium runkit tests', async function () {
+        it('Selenium Runkit Advanced Demo Tests', async function () {
             // test all urls
             const urls = ["convert_fraction_to_bignumber.js.html", "custom_argument_parsing.js.html", "custom_datatype.js.html", "custom_evaluate_using_import.js.html", "custom_evaluate_using_factories.js.html", "custom_relational_functions.js.html", "custom_loading.mjs.html", "expression_trees.js.html", "custom_scope_objects.js.html", "function_transform.js.html", "custom_evaluate_using_factories.js.html", "more_secure_eval.js.html", "more_secure_eval.js.html"];
 
