@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <center><h1>Expression Trees</h1></center>
+        <div id="my-element"></div>
+        <script>var notebook = RunKit.createNotebook({
+            // the parent element for the new notebook
+            element: document.getElementById("my-element"),
+            // specify the source of the notebook
+            source: "const { parse, ConstantNode } = require('mathjs')\n\n// Filter an expression tree\nconsole.log('Filter all symbol nodes \"x\" in the expression \"x^2 + x/4 + 3*y\"')\nconst node = parse('x^2 + x/4 + 3*y')\nconst filtered = node.filter(function (node) {\n  return node.isSymbolNode && node.name === 'x'\n})\n// returns an array with two entries: two SymbolNodes 'x'\n\nfiltered.forEach(function (node) {\n  console.log(node.type, node.toString())\n})\n// outputs:\n//  SymbolNode x\n//  SymbolNode x\n\n// Traverse an expression tree\nconsole.log()\nconsole.log('Traverse the expression tree of expression \"3 * x + 2\"')\nconst node1 = parse('3 * x + 2')\nnode1.traverse(function (node, path, parent) {\n  switch (node.type) {\n    case 'OperatorNode':\n      console.log(node.type, node.op)\n      break\n    case 'ConstantNode':\n      console.log(node.type, node.value)\n      break\n    case 'SymbolNode':\n      console.log(node.type, node.name)\n      break\n    default: console.log(node.type)\n  }\n})\n// outputs:\n//   OperatorNode +\n//   OperatorNode *\n//   ConstantNode 3\n//   SymbolNode x\n//   ConstantNode 2\n\n// transform an expression tree\nconsole.log()\nconsole.log('Replace all symbol nodes \"x\" in expression \"x^2 + 5*x\" with a constant 3')\nconst node2 = parse('x^2 + 5*x')\nconst transformed = node2.transform(function (node, path, parent) {\n  if (node.isSymbolNode && node.name === 'x') {\n    return new ConstantNode(3)\n  } else {\n    return node\n  }\n})\nconsole.log(transformed.toString())\n// outputs: '3 ^ 2 + 5 * 3'\n"
+          })</script>
+              </body>
+          </html>

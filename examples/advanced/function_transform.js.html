@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <center><h1>Function Transform</h1></center>
+        <div id="my-element"></div>
+        <script>var notebook = RunKit.createNotebook({
+            // the parent element for the new notebook
+            element: document.getElementById("my-element"),
+            // specify the source of the notebook
+            source: "/**\n * Function transforms\n *\n * When using functions via the expression parser, it is possible to preprocess\n * function arguments and post process a functions return value by writing a\n * *transform* for the function. A transform is a function wrapping around a\n * function to be transformed or completely replaces a function.\n */\nconst { create, all } = require('mathjs')\nconst math = create(all)\n\n// create a function\nfunction addIt (a, b) {\n  return a + b\n}\n\n// attach a transform function to the function addIt\naddIt.transform = function (a, b) {\n  console.log('input: a=' + a + ', b=' + b)\n  // we can manipulate the input arguments here before executing addIt\n\n  const res = addIt(a, b)\n\n  console.log('result: ' + res)\n  // we can manipulate the result here before returning\n\n  return res\n}\n\n// import the function into math.js\nmath.import({\n  addIt: addIt\n})\n\n// use the function via the expression parser\nconsole.log('Using expression parser:')\nconsole.log('2+4=' + math.evaluate('addIt(2, 4)'))\n// This will output:\n//\n//     input: a=2, b=4\n//     result: 6\n//     2+4=6\n\n// when used via plain JavaScript, the transform is not invoked\nconsole.log('')\nconsole.log('Using plain JavaScript:')\nconsole.log('2+4=' + math.addIt(2, 4))\n// This will output:\n//\n//     6\n"
+          })</script>
+              </body>
+          </html>

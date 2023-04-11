@@ -25,7 +25,7 @@ suite(function (env) {
 
         it('Selenium runkit tests', async function () {
             // test all urls
-            const urls = ["convert_fraction_to_bignumber.js.html", "custom_argument_parsing.js.html", "custom_datatype.js.html", "custom_evaluate_using_import.js.html", "custom_evaluate_using_factories.js.html", "custom_relational_functions.js.html", "custom_loading.mjs.html"];
+            const urls = ["convert_fraction_to_bignumber.js.html", "custom_argument_parsing.js.html", "custom_datatype.js.html", "custom_evaluate_using_import.js.html", "custom_evaluate_using_factories.js.html", "custom_relational_functions.js.html", "custom_loading.mjs.html", "expression_trees.js.html", "custom_scope_objects.js.html", "function_transform.js.html", "custom_evaluate_using_factories.js.html", "more_secure_eval.js.html", "more_secure_eval.js.html"];
 
             for (let i = 0; i < urls.length; i++) {
                 const url = urls[i];

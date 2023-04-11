@@ -81,6 +81,32 @@ app.get('/custom_loading.mjs.html', function(req, res) {
   res.sendFile(path.join(__dirname, '..', 'custom_loading.mjs.html'));
 })
 
+
+app.get('/expression_trees.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'expression_trees.js.html'));
+})
+
+app.get('/custom_scope_objects.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'custom_scope_objects.js.html'));
+})
+
+app.get('/function_transform.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'function_transform.js.html'));
+});
+
+app.get('/custom_evaluate_using_factories.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'custom_evaluate_using_factories.js.html'));
+})
+
+app.get('/more_secure_eval.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'more_secure_eval.js.html'));
+})
+
+app.get('/use_bigint.js.html', function(req, res) {
+  res.sendFile(path.join(__dirname, '..', 'use_bigint.js.html'));
+})
+
+
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 })

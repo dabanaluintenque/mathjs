@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <center><h1>Use Bigint</h1></center>
+        <div id="my-element"></div>
+        <script>var notebook = RunKit.createNotebook({
+            // the parent element for the new notebook
+            element: document.getElementById("my-element"),
+            // specify the source of the notebook
+            source: "// This example demonstrates how you could integrate support for BigInt\n// in mathjs. It's just a proof of concept, for full support you will\n// have to defined more functions and define conversions from and to\n// other data types.\n\nconst { create, all, factory } = require('mathjs')\nconst math = create(all)\n\n// we can also add conversions here from number or string to BigInt\n// and vice versa using math.typed.addConversion(...)\n\nmath.import([\n  factory('BigInt', ['typed'], function createBigInt ({ typed }) {\n    typed.addType({\n      name: 'BigInt',\n      test: (x) => typeof x === 'bigint' // eslint-disable-line\n    })\n\n    return BigInt // eslint-disable-line\n  }, { lazy: false }),\n\n  factory('bigint', ['typed', 'BigInt'], function createBigint ({ typed, BigInt }) {\n    return typed('bigint', {\n      'number | string ': (x) => BigInt(x) // eslint-disable-line\n    })\n  }),\n\n  factory('add', ['typed'], function createBigIntAdd ({ typed }) {\n    return typed('add', {\n      'BigInt, BigInt': (a, b) => a + b\n    })\n  }),\n\n  factory('pow', ['typed'], function createBigIntPow ({ typed }) {\n    return typed('pow', {\n      'BigInt, BigInt': (a, b) => a ** b\n    })\n  })\n])\n\nconsole.log(math.evaluate('4349 + 5249'))\nconsole.log(math.evaluate('bigint(4349) + bigint(5249)'))\nconsole.log(math.evaluate('bigint(4349) ^ bigint(5249)'))\n"
+          })
+          </script>
+    </body>
+</html>

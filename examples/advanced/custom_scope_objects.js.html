@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <center><h1>Custom Scope Objects</h1></center>
+        <div id="my-element"></div>
+        <script>var notebook = RunKit.createNotebook({
+            // the parent element for the new notebook
+            element: document.getElementById("my-element"),
+            // specify the source of the notebook
+            source: "const { create, all } = require('mathjs')\n\nconst math = create(all)\n\n// The expression evaluator accepts an optional scope object.\n// This is the symbol table for variable defintions and function declations.\n\n// Scope can be a bare object.\nfunction withObjectScope () {\n  const scope = { x: 3 }\n\n  math.evaluate('x', scope) // 1\n  math.evaluate('y = 2 x', scope)\n  math.evaluate('scalar = 1', scope)\n  math.evaluate('area(length, width) = length * width * scalar', scope)\n  math.evaluate('A = area(x, y)', scope)\n\n  console.log('Object scope:', scope)\n}\n\n// Where flexibility is important, scope can duck type appear to be a Map.\nfunction withMapScope (scope, name) {\n  scope.set('x', 3)\n\n  math.evaluate('x', scope) // 1\n  math.evaluate('y = 2 x', scope)\n  math.evaluate('scalar = 1', scope)\n  math.evaluate('area(length, width) = length * width * scalar', scope)\n  math.evaluate('A = area(x, y)', scope)\n\n  console.log(`Map-like scope (${name}):`, scope.localScope)\n}\n\n// This is a minimal set of functions to look like a Map.\nclass MapScope {\n  constructor () {\n    this.localScope = new Map()\n  }\n\n  get (key) {\n    // Remember to sanitize your inputs, or use\n    // a datastructure that isn't a footgun.\n    return this.localScope.get(key)\n  }\n\n  set (key, value) {\n    return this.localScope.set(key, value)\n  }\n\n  has (key) {\n    return this.localScope.has(key)\n  }\n\n  keys () {\n    return this.localScope.keys()\n  }\n}\n\n/*\n * This is a more fully featured example, with all methods\n * used in mathjs.\n *\n */\nclass AdvancedMapScope extends MapScope {\n  constructor (parent) {\n    super()\n    this.parentScope = parent\n  }\n\n  get (key) {\n    return this.localScope.get(key) ?? this.parentScope?.get(key)\n  }\n\n  has (key) {\n    return this.localScope.has(key) ?? this.parentScope?.get(key)\n  }\n\n  keys () {\n    if (this.parentScope) {\n      return new Set([...this.localScope.keys(), ...this.parentScope.keys()])\n    } else {\n      return this.localScope.keys()\n    }\n  }\n\n  delete () {\n    return this.localScope.delete()\n  }\n\n  clear () {\n    return this.localScope.clear()\n  }\n\n  /**\n   * Creates a child scope from this one. This is used in function calls.\n   *\n   * @returns a new Map scope that has access to the symbols in the parent, but\n   * cannot overwrite them.\n   */\n  createSubScope () {\n    return new AdvancedMapScope(this)\n  }\n\n  toString () {\n    return this.localScope.toString()\n  }\n}\n\nwithObjectScope()\n// Where safety is important, scope can also be a Map\nwithMapScope(new Map(), 'simple Map')\n// Where flexibility is important, scope can duck type appear to be a Map.\nwithMapScope(new MapScope(), 'MapScope example')\n// Extra methods allow even finer grain control.\nwithMapScope(new AdvancedMapScope(), 'AdvancedScope example')\n"
+})</script>
+    </body>
+</html>

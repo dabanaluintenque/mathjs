@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <center><h1>More Secure Eval</h1></center>
+        <div id="my-element"></div>
+        <script>var notebook = RunKit.createNotebook({
+            // the parent element for the new notebook
+            element: document.getElementById("my-element"),
+            // specify the source of the notebook
+            source: "// Expression parser security\n//\n// Executing arbitrary expressions like enabled by the expression parser of\n// mathjs involves a risk in general. When you're using mathjs to let users\n// execute arbitrary expressions, it's good to take a moment to think about\n// possible security and stability implications, especially when running the\n// code server side.\n//\n// There is a small number of functions which yield the biggest security risk\n// in the expression parser of math.js:\n//\n// - `import` and `createUnit` which alter the built-in functionality and allow\n//   overriding existing functions and units.\n// - `evaluate`, `parse`, `simplify`, and `derivative` which parse arbitrary input\n//   into a manipulable expression tree.\n//\n// To make the expression parser less vulnerable whilst still supporting most\n// functionality, these functions can be disabled, as demonstrated in this\n// example.\n\nconst { create, all } = require('mathjs')\nconst math = create(all)\n\nconst limitedEvaluate = math.evaluate\n\nmath.import({\n  import: function () { throw new Error('Function import is disabled') },\n  createUnit: function () { throw new Error('Function createUnit is disabled') },\n  evaluate: function () { throw new Error('Function evaluate is disabled') },\n  parse: function () { throw new Error('Function parse is disabled') },\n  simplify: function () { throw new Error('Function simplify is disabled') },\n  derivative: function () { throw new Error('Function derivative is disabled') }\n}, { override: true })\n\nconsole.log(limitedEvaluate('sqrt(16)')) // Ok, 4\nconsole.log(limitedEvaluate('parse(\"2+3\")')) // Error: Function parse is disabled\n"
+          })</script>
+              </body>
+          </html>
