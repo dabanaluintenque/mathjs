@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <div id="custom-datatype-js">
+          
+        </div>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("custom-datatype-js"),
+    // specify the source of the notebook
+    source: "// we use the number only implementation in order to not pull in\n// the `Unit` class for example. when using as library,\n// use require('mathjs/number')\nconst { create, evaluateDependencies, factory } = require('mathjs')\n\n// custom implementations of all functions you want to support\nconst add = (a, b) => a + b\nconst subtract = (a, b) => a - b\nconst multiply = (a, b) => a * b\nconst divide = (a, b) => a / b\n\n// create factories for the functions, and create an evaluate function with those\n// these functions will also be used by the classes like Unit.\nconst { evaluate } = create({\n  evaluateDependencies,\n  createAdd: factory('add', [], () => add),\n  createSubtract: factory('subtract', [], () => subtract),\n  createMultiply: factory('multiply', [], () => multiply),\n  createDivide: factory('divide', [], () => divide)\n})\n\nconsole.log(evaluate('2 + 3 * 4')) // 14\n"
+})</script>
+    </body>
+</html>
+
+

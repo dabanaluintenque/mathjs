@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <script src="https://embed.runkit.com"></script>
+        <div id="custom-datatype-js">
+          
+        </div>
+<script>var notebook = RunKit.createNotebook({
+    // the parent element for the new notebook
+    element: document.getElementById("custom-datatype-js"),
+    // specify the source of the notebook
+    source: "// This example demonstrates importing a custom data type,\n// and extending an existing function (add) with support for this data type.\n\nconst { create, factory, all } = require('mathjs')\nconst math = create(all)\n\n// factory function which defines a new data type CustomValue\nconst createCustomValue = factory('CustomValue', ['typed'], ({ typed }) => {\n// create a new data type\nfunction CustomValue (value) {\nthis.value = value\n}\nCustomValue.prototype.isCustomValue = true\nCustomValue.prototype.toString = function () {\nreturn 'CustomValue:' + this.value\n}\n\n\n// define a new data type with typed-function\ntyped.addType({\nname: 'CustomValue',\ntest: function (x) {\n// test whether x is of type CustomValue\nreturn x && x.isCustomValue === true\n}\n})\n\nreturn CustomValue\n})\n\n// function add which can add the CustomValue data type\n// When imported in math.js, the existing function `add` with support for\n\n// CustomValue, because both implementations are typed-functions and do not\n// have conflicting signatures.\nconst createAddCustomValue = factory('add', ['typed', 'CustomValue'], ({ typed, CustomValue }) => {\n\nreturn typed('add', {\n'CustomValue, CustomValue': function (a, b) {\n      return new CustomValue(a.value + b.value)\n}\n})\n\n})\n\n// import the new data type and function\nmath.import([\n  \ncreateCustomValue,\n  \ncreateAddCustomValue\n])\n\n// use the new type\nconst ans1 = math.add(new math.CustomValue(2), new math.CustomValue(3))\nconsole.log(ans1.toString())\n// outputs 'CustomValue:5'\n\n// you can automatically use the new type in functions which use `add` under the hood:\nconst ans2 = math.sum(new math.CustomValue(6), new math.CustomValue(1), new math.CustomValue(2))\nconsole.log(ans2.toString())\n// outputs 'CustomValue:9'\n"
+})</script>
+    </body>
+</html>
