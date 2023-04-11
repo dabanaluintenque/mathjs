@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Spring 2 project Algebra Browser</title>
+        <script src="../../../../lib/browser/math.js"></script>
+        <link rel="stylesheet" href="../stylesheet/common.css">
+    </head>
+    <body>
+
+        <h1 class="header">Sprint 2 Algebra for browser</h1>
+        <h2 id="title">Symplify Expression</h2>
+
+        <div id="body">
+            <div>
+                <p>Example #1</p>
+                <p id="simplifyexpressionId"></p>
+                <form>
+                    <label>Enter values Example: 3 + 2 / 4 </label><br>
+                    <br> 
+                    <br><input type="text" id="id#1" placeholder="3 + 2 / 4"/>
+                </form>
+                <br><button onclick="simplifyExpression()">simplifyExpression</button>
+            </div>  
+
+            <div>
+                <p>Example #2</p>
+                <p id="calculatederivativesId"></p>
+                <h3>Calculate derivatives</h3>
+                <form>
+                    <label>Enter values Example: 2x^2 + 3x + 4,   x</label> <br>
+                    <br><input type="text" id="id#2" placeholder="2x^2 + 3x + 4" >,
+                    <input type="text" id="id#3" size="3" placeholder="x">
+                </form>
+                <br><button onclick="calculateDerivatives()">calculate Derivatives</button>
+            </div>
+    
+        </div>
+
+        <script>
+            const simplifyExpression = () => {
+                const id1 = document.getElementById('id#1').value;
+                const result = math.simplify(`${id1} `).toString()
+                console.log(result);
+
+                document.getElementById("simplifyexpressionId").innerHTML = result;
+                return result;
+            }
+
+            const calculateDerivatives = () => {
+                const id2 = document.getElementById('id#2').value;
+                const id3 = document.getElementById('id#3').value;
+                const result = math.derivative(`${id2 }`, `${id3}`).toString();
+                
+                let calculatederivativesId = document.getElementById('calculatederivativesId');
+
+                return calculatederivativesId.innerHTML = result;
+            }
+        </script>
+        <div>
+
+
+            
+        </div>
+
+    </body>
+</html>

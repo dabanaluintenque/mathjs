@@ -1,0 +1,23 @@
+
+.header{
+    margin-left: 35%;
+}
+
+#title{
+    margin-left: 40%;
+}
+#body {
+
+    margin-left: 30%;
+}
+
+input[type='number'] {
+    width: 30px;
+}
+
+#basicusageId {
+    color: red;
+}
+ #rounderrorId {
+    color: red;
+}

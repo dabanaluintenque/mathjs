@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title> Sprint 2 project Serialization Browser</title>
+            <script src="../../../../lib/browser/math.js"></script>
+            <link rel="stylesheet" href="../stylesheet/common.css">
+        </head>
+
+        <body>
+
+            <div id="body">
+                <div>
+                    <h1 >Serialize a math.js data type into a JSON string</h1>
+                    <p>Example: 1</p>
+                    <p id="serializeId"></p>
+                    <form>
+                        <label>Enter values, Example: (2+3i)</label><br>
+                        <br><input type="text" id="id#1" placeholder="2 + 3i">
+                    </form>
+                    <br>
+                    <button onclick="serializeDataIntoJson()">Serialize Data</button>
+
+                </div>
+
+                <div>
+                    <h1>deserialize a JSON string into a math.js data type</h1>
+                    <p>Example: 2</p>
+                    <p id="deserializeId"></p>
+                    <form>
+                        <label>Enter valus Example: {"mathjs": "Unit", "value":5, "unit": "cm"}</label><br>
+                        <br>
+                        <input type="text" id="id#2" placeholder='{mathjs":"Unit","value":5,"unit":"cm"}' size="30">
+                    </form>
+                    <br><button onclick="deserializeJsonData()">Deserialize Data</button>
+                </div>
+                <script>
+                    const serializeDataIntoJson = () => {
+                        const id1 = document.getElementById('id#1').value = '2 +3i';
+                        const x = math.complex(id1)
+                        const str1 = JSON.stringify(x, math.replacer);
+
+                        const serializeId = document.getElementById('serializeId');
+
+                        console.log(str1)
+                        
+                        return serializeId.innerHTML = str1;
+                    }
+
+                    const deserializeJsonData = () => {
+                        const id2 = document.getElementById('id#2').value;
+                        const y = JSON.parse(id2, math.reviver);
+                        const deserializeId = document.getElementById('deserializeId');
+                        return deserializeId.innerHTML = y.toString();
+                    }
+                </script>
+
+            </div>
+        </body>
+    </html>

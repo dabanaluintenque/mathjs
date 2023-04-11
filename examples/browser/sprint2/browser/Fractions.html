@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title> Sprint 2 project Fractions Browser</title>
+            <script src="../../../../lib/browser/math.js"></script>
+            <link rel="stylesheet" href="../stylesheet/common.css">
+        </head>
+
+        <body>
+            <h1 class="header">Sprint 2 Project Fractions Browser</h1>
+            <h1 id="title"> Basic Usage</h1>
+            <div id="body">
+                <div>
+                    <p>Example # 1</p>
+                    <p id="basicusageId"></p>
+                    <form>
+                        <label>Evaluate fraction, Example: 0.125</label><br>
+                        <br><input type="text" id="id#1" placeholder="1/3" size="7">
+                    </form>
+                    <br><button onclick="basicUsage()">basic usage</button>
+                </div>
+
+                <div>
+                    <h2> Round-off errors with numbers</h2>
+                    <p>Example #2</p>
+                    <p id="rounderrorId"></p>
+                    <form>
+                        <label>Evaluate round-off errors with numbers, Example: 0.1, 0.2</label><br>
+                        <br>
+                        <input type="text" id="id#2" placeholder="0.1" size="4">,
+                        <input type="text" id="id#3" placeholder="0.2" size="4">
+
+                    </form>
+                    <br>
+                    <button onclick="RoundWithError()">Round-off errors with numbers</button>
+                </div>
+
+                <div>
+                    <h2> No round-off errors with  fractions</h2>
+                    <p>Example #3</p>
+                    <p id="norounderrorId"></p>
+                    <form>
+                        <label>Evaluate No round-off errors with fractions, Example: 0.1, 02</label><br>
+                        <br>
+                        <input type="text" id="id#4" placeholder="0.1" size="4">,
+                        <input type="text" id="id#5" placeholder="0.2" size="4">
+                    </form>
+                    <br>
+                    <button onclick="NoRoundOffWithErrorFraction()">No Round-off errors with fractions</button>
+                </div>
+            </div>
+
+            
+
+            <script>
+                const printRatio = (value) => {
+                    const basicId = document.getElementById('basicusageId')
+                    basicId.innerHTML = math.format(value, {fraction: 'ratio'});
+                }
+                
+                const basicUsage = () => {
+                    const id1 = document.getElementById('id#1').value;
+                    const answer =  printRatio(math.fraction(id1))
+                    return answer;
+                }
+
+                const print = (value) => {
+                    const rounderrorId = document.getElementById('rounderrorId');
+                    rounderrorId.innerHTML = math.format(value, {fraction: 'decimal'})
+                }
+                
+                const print2 = (value) => {
+                    const rounderrorId = document.getElementById('norounderrorId');
+                    rounderrorId.innerHTML = math.format(value, {fraction: 'decimal'})
+                }
+                const RoundWithError = () => {
+                    const id2 = document.getElementById('id#2').value;
+                    const id3 = document.getElementById('id#3').value;
+                    const answer = print(math.add( `${id2}` , `${id3}`));
+                    return answer;
+                }
+
+                const NoRoundOffWithErrorFraction = () =>{
+                    const id4 = document.getElementById('id#4').value = "0.1";
+                    const id5 = document.getElementById('id#5').value = "0.2"
+                    const answer = print2(math.add(math.fraction(id4), math.fraction(id5)));
+                    return answer
+                }
+              
+            </script>
+
+        </body>
+    </html>

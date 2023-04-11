@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title> Sprint 2 project Objects Browser</title>
+            <script src="../../../../lib/browser/math.js"></script>
+            <link rel="stylesheet" href="../stylesheet/common.css">
+        </head>
+
+        <body>
+        
+            <div id="body">
+               <div>
+                    <h2>Create Object</h2>
+                    
+                    <div>
+                        <p>Example:</p>
+                        <p id="objectId"></p>
+                        <form>
+                            <label>Create object Example: {x: 2  + 1,    y: 4 }</label><br>
+                            <br><input type="text" id="id#1" placeholder="{x: 2 + 1 , y: 4}">
+                        </form>
+                        <br><button onclick="EvaluateOjbect()">EvaluateObject</button>
+                    </div>
+               </div>
+
+               <div>
+                    <script>
+                        function print (value) {
+                            const precision = 14;
+                            const objectId = document.getElementById('objectId');
+                            objectId.innerHTML = math.format(value, precision);
+
+                        }
+                        
+                        function EvaluateOjbect () {
+                            const id1 = document.getElementById('id#1').value;
+                            //const id2 = doucment.getElementById('id#2').value
+                            const answer = print(math.evaluate(`${id1}`))
+                        }
+                    </script>
+               </div>
+            </div>
+            
+        </body>
+    </html>
