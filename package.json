@@ -96,7 +96,7 @@
     "zeros": "1.0.0"
   },
   "type": "module",
-  "main": "./lib/js",
+  "main": "./lib/cjs",
   "types": "./types/index.d.ts",
   "module": "./lib/esm",
   "unpkg": "./lib/browser/math.js",
