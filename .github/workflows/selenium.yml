@@ -1,4 +1,4 @@
-name: run api testing
+name: Run Example Demo Tests
 on:
     push:
         branches: [develop]
@@ -22,6 +22,10 @@ jobs:
               working-directory: ./examples/advanced/tests
               run: npm install
 
-            - name: API testing
+            - name: Test Advanced Examples
               working-directory: ./examples/advanced/tests
               run: npx mocha --no-timeouts advanced_test.js
+
+            - name: Test Basic Examples
+              working-directory: ./examples/tests
+              run: npx mocha --no-timeouts basic_examples.js
