@@ -5,6 +5,7 @@ const {Builder, By, Browser} = require('selenium-webdriver');
 const {suite} = require('selenium-webdriver/testing');
 const assert = require("assert");
 const firefox = require('selenium-webdriver/firefox');
+const { time } = require('console');
 
 const service = new firefox.ServiceBuilder('./geckodriver');
 const driver = new Builder().forBrowser('firefox').setFirefoxService(service).build();
@@ -24,17 +25,18 @@ suite(function (env) {
             // test all urls
             const urls = ["convert_fraction_to_bignumber.js.html", "custom_argument_parsing.js.html", "custom_datatype.js.html", "custom_evaluate_using_import.js.html", "custom_evaluate_using_factories.js.html", "custom_relational_functions.js.html", "custom_loading.mjs.html"];
 
-            urls.map(async (url)=> {
+            for (let i = 0; i < urls.length; i++) {
+                const url = urls[i];
                 await driver.get('http://localhost:8080/' + url);
 
-                // check that runkit loaded
-                let runkitWidget = await driver.findElement(By.name('runkit-embed-0'));
+                await driver.manage().setTimeouts({implicit: 500});
 
-                assert.notEqual(runkitWidget, undefined)
-
-                console.log("success for url " + url)
-                console.log(runkitWidget)
-            })
+                await driver.findElement(By.name('runkit-embed-0')).then(function(webElement) {
+                    console.log("success for url " + url)
+                }, function(err) {
+                    assert.fail('TEST FAILED: Runkit element not found on page, not loaded properly')
+                });
+            }
           });
     });
 }, { browsers: [Browser.CHROME, Browser.FIREFOX]});
