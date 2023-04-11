@@ -1,0 +1,26 @@
+name: run api testing
+on:
+    push:
+        branches: [develop]
+    pull_request:
+        branches: [develop]
+jobs:
+    api-test:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [14.x]
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install Dependencies
+              working-directory: ./examples/advanced/tests
+              run: npm install
+
+            - name: API testing
+              run: npx mocha --no-timeouts advanced_test.js
