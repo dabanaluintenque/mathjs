@@ -106,7 +106,13 @@ process.on('uncaughtException', function (err) {
 
 // start the server
 const PORT = process.env.PORT || 8080
-app.listen(PORT, function () {
+const server = app.listen(PORT, function () {
   console.log('Listening at http://localhost:' + PORT)
   console.log('Example request:\n    GET http://localhost:' + PORT + '/mathjs?expr=sqrt(16)')
 })
+
+function Stop() {
+  server.close();
+}
+
+exports.Stop = Stop

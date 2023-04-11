@@ -1,5 +1,5 @@
 // start webserver
-require('../web_server/server')
+const web = require('../web_server/server')
 
 const {Builder, By, Browser} = require('selenium-webdriver');
 const {suite} = require('selenium-webdriver/testing');
@@ -19,7 +19,9 @@ suite(function (env) {
             driver = new Builder().forBrowser('firefox').setFirefoxService(service).build();
         });
     
-        after(async () => await driver.quit());
+        after(async () => {
+            await driver.quit()
+        });
 
         it('Selenium runkit tests', async function () {
             // test all urls
@@ -37,6 +39,8 @@ suite(function (env) {
                     assert.fail('TEST FAILED: Runkit element not found on page, not loaded properly')
                 });
             }
+
+            web.Stop();
           });
     });
 }, { browsers: [Browser.CHROME, Browser.FIREFOX]});
