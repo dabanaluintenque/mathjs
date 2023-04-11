@@ -23,4 +23,5 @@ jobs:
               run: npm install
 
             - name: API testing
+              working-directory: ./examples/advanced/tests
               run: npx mocha --no-timeouts advanced_test.js
