@@ -8,15 +8,15 @@ const firefox = require('selenium-webdriver/firefox');
 const { time } = require('console');
 
 const service = new firefox.ServiceBuilder('./geckodriver');
-const driver = new Builder().forBrowser('firefox').setFirefoxService(service).build();
-
+//const driver = new Builder().forBrowser('firefox').setFirefoxService(service).build();
+const options = new firefox.Options();
 
 suite(function (env) {
     describe('Testing advanced examples', function () {
         let driver;
 
         before(async function () {
-            driver = new Builder().forBrowser('firefox').setFirefoxService(service).build();
+            driver = new Builder().forBrowser('firefox').setFirefoxService(service).setFirefoxOptions(options.addArguments('--headless')).build();
         });
     
         after(async () => {
@@ -43,6 +43,6 @@ suite(function (env) {
             web.Stop();
           });
     });
-}, { browsers: [Browser.CHROME, Browser.FIREFOX]});
+}, { browsers: [Browser.FIREFOX]});
 
 
