@@ -107,7 +107,7 @@ app.get('/more_secure_eval.js.html', function(req, res) {
   res.sendFile(path.join(__dirname, '..', 'more_secure_eval.js.html'));
 })
 
-app.get('/use_bigint.js.html', function(req, res) {
+app.get('/use', function(req, res) {
   res.sendFile(path.join(__dirname, '..', 'use_bigint.js.html'));
 })
 
@@ -116,6 +116,10 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '..', 'index.html'));
 })
 
+// Da
+app.get('/rationalize', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../browser/sprint2/case2Rationalize/rationalize.html'))
+})
 /**
  * Format error messages as string
  * @param {Error} err
