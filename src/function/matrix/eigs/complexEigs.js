@@ -15,6 +15,26 @@ export function createComplexEigs ({ addScalar, subtract, flatten, multiply, mul
       findVectors = true
     }
 
+    let result = identifyTriangularMatrix(arr, N, type)
+
+    
+    /*if (result.isTriangular) {
+      let eigenvalues = result.values
+
+      var vectors;
+      if (findVectors) {
+        vectors = calculateEigenvectors(arr, N, type); 
+      }
+
+      return {
+        values: eigenvalues,
+        vectors
+      };
+    }*/
+
+    if (!result.isTriangular) {
+      
+    }
     // TODO check if any row/col are zero except the diagonal
 
     // make sure corresponding rows and columns have similar magnitude
@@ -40,6 +60,9 @@ export function createComplexEigs ({ addScalar, subtract, flatten, multiply, mul
     // find eigenvalues
     const { values, C } = iterateUntilTriangular(arr, N, prec, type, findVectors)
 
+    console.log("C:")
+    console.log(C)
+
     // values is the list of eigenvalues, C is the column
     // transformation matrix that transforms arr, the hessenberg
     // matrix, to upper triangular
@@ -54,6 +77,46 @@ export function createComplexEigs ({ addScalar, subtract, flatten, multiply, mul
     }
 
     return { values, vectors }
+  }
+
+  function calculateEigenvectors() {
+      // Import the 'numeric' library
+    const numeric = require('numeric');
+
+    // Calculate the eigenvalues and eigenvectors of the input matrix
+    const eigResult = numeric.eig(arr);
+    const eigenvectors = eigResult.E.x;
+
+    return eigenvectors;
+  }
+
+  /**
+   * 
+   * @param {number[][]} arr 
+   * @param {number} N 
+   * @param {'number'|'BigNumber'|'Complex'} type 
+   * @returns {{ isTriangular: boolean, values: number[] }}
+   */
+  function identifyTriangularMatrix(arr, N, type) {
+    let values = [];
+    let result = false;
+    for (let i = 1; i < N; i++) {
+      for (let j = 0; j < i; j++) {
+        if (arr[i][j] !== 0) {
+          result = false;
+          return {
+            isTriangular: result, 
+            values
+          };
+        }
+        values.push(arr[i-1][j]);
+      }
+    }
+
+    result = true;
+
+    let x = {isTriangular: result, values};
+    return x
   }
 
   /**
