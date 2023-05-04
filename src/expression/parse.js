@@ -1180,15 +1180,15 @@ export const createParse = /* #__PURE__ */ factory(name, dependencies, ({
     }
 
     if (hasOwnProperty(operators, state.token)) {
-      const snapshot = JSON.parse(JSON.stringify(state));;
+      const snapshot = JSON.parse(JSON.stringify(state))
 
       fn = operators[state.token]
       name = state.token
 
       getTokenSkipNewline(state)
       if (state.token !== ')') {
-        params = [parseUnary(state)];
-        return new OperatorNode(name, fn, params);
+        params = [parseUnary(state)]
+        return new OperatorNode(name, fn, params)
       } else {
         state = snapshot
       }
