@@ -72,7 +72,7 @@ export const createSymbolNode = /* #__PURE__ */ factory(name, dependencies, ({ m
         }
       } else {
         const isUnit = isValuelessUnit(name)
-
+        
         return function (scope, args, context) {
           return scope.has(name)
             ? scope.get(name)
