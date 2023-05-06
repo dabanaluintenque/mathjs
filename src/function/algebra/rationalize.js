@@ -247,7 +247,9 @@ export const createRationalize = /* #__PURE__ */ factory(name, dependencies, ({
         if (node.op === '^') {
           // TODO: handle negative exponents like in '1/x^(-2)'
           if (node.args[1].type !== 'ConstantNode' || !isInteger(parseFloat(node.args[1].value))) {
-            throw new Error('There is a non-integer exponent')
+            //throw new Error('There is a non-integer exponent')
+              const result = `${node.args[1].args[0]}/${node.args[0]}`
+              console.log(result)
           } else {
             recPoly(node.args[0])
           }
