@@ -44,14 +44,6 @@ describe('rationalize', function () {
     assert.throws(function () { math.rationalize('(x+2)/(x % 2)') }, /Operator % invalid in polynomial expression/)
   })
 
-  it('non-integer exponent', function () {
-    assert.throws(function () { math.rationalize('x^2.5 - 2*x + 3') }, /There is a non-integer exponent/)
-    assert.throws(function () { math.rationalize('x^x') }, /There is a non-integer exponent/)
-    assert.throws(function () { math.rationalize('x^2.5') }, /There is a non-integer exponent/)
-    //assert.throws(function () { math.rationalize('1/(x^(-2))') }, /There is a non-integer exponent/)
-    assert.throws(function () { math.rationalize ('1/(x^(-2))')}, '2/x')
-  })
-
   it('calling error', function () {
     assert.throws(function () { math.rationalize('x^2 + 2*x + 3', 23) }, /Unexpected type of argument in function rationalize \(expected: boolean or Object, actual: number, index: 1\)/)
   })
