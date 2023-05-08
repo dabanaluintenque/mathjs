@@ -53,15 +53,14 @@ export const createParserClass = /* #__PURE__ */ factory(name, dependencies, ({ 
    *    parser.clear()
    *
    */
-  function Parser () {
+  function Parser() {
     if (!(this instanceof Parser)) {
-      throw new SyntaxError(
-        'Constructor must be called with the new operator')
+      throw new SyntaxError('Constructor must be called with the new operator')
     }
 
     Object.defineProperty(this, 'scope', {
       value: createEmptyMap(),
-      writable: false
+      writable: false,
     })
   }
 
@@ -126,8 +125,10 @@ export const createParserClass = /* #__PURE__ */ factory(name, dependencies, ({ 
    * Remove a variable from the parsers scope
    * @param {string} name
    */
+
+  // Added Type To parser
   Parser.prototype.remove = function (name) {
-    this.scope.delete(name)
+    return this.scope.delete(name)
   }
 
   /**
@@ -136,6 +137,8 @@ export const createParserClass = /* #__PURE__ */ factory(name, dependencies, ({ 
   Parser.prototype.clear = function () {
     this.scope.clear()
   }
+
+  //end
 
   return Parser
 }, { isClass: true })
