@@ -53,14 +53,14 @@ export const createParserClass = /* #__PURE__ */ factory(name, dependencies, ({ 
    *    parser.clear()
    *
    */
-  function Parser() {
+  function Parser () {
     if (!(this instanceof Parser)) {
       throw new SyntaxError('Constructor must be called with the new operator')
     }
 
     Object.defineProperty(this, 'scope', {
       value: createEmptyMap(),
-      writable: false,
+      writable: false
     })
   }
 
@@ -138,7 +138,7 @@ export const createParserClass = /* #__PURE__ */ factory(name, dependencies, ({ 
     this.scope.clear()
   }
 
-  //end
+  // end
 
   return Parser
 }, { isClass: true })
