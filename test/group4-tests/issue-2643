@@ -1,0 +1,34 @@
+// test subtract
+import assert from 'assert'
+
+import approx from '../../../../tools/approx.js'
+import math from '../../../../src/defaultInstance.js'
+const bignumber = math.bignumber
+const subtract = math.subtract
+
+describe('subtract', function () {
+  it('should subtract two numbers correctly', function () {
+    assert.deepStrictEqual(subtract(4, 2), 2)
+    assert.deepStrictEqual(subtract(4, -4), 8)
+    assert.deepStrictEqual(subtract(-4, -4), 0)
+    assert.deepStrictEqual(subtract(-4, 4), -8)
+    assert.deepStrictEqual(subtract(2, 4), -2)
+    assert.deepStrictEqual(subtract(3, 0), 3)
+    assert.deepStrictEqual(subtract(0, 3), -3)
+    assert.deepStrictEqual(subtract(0, 3), -3)
+    assert.deepStrictEqual(subtract(0, 3), -3)
+  })
+
+describe('Array', function () {
+   it('should subtract arrays correctly', function () {
+      const a2 = [[10, 20], [30, 40]]
+      const a3 = [[5, 6], [7, 8]]
+      const a4 = subtract(a2, a3)
+      assert.deepStrictEqual(a4, [[5, 14], [23, 32]])
+    })
+   it('should subtract a scalar and an array correctly', function () {
+      assert.deepStrictEqual(subtract(2, [3, 4]), [-1, -2])
+      assert.deepStrictEqual(subtract(2, [3, 0]), [-1, 2])
+      assert.deepStrictEqual(subtract([3, 4], 2), [1, 2])
+      assert.deepStrictEqual(subtract([3, 0], 2), [1, -2])
+    })
