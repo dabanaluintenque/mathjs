@@ -18,5 +18,5 @@ describe('mathjs parser', function () {
     const result2 = parse(input2, options2)
     assert.deepEqual(result2, new expression.node.ConstantNode('2\''))
     assert.equal(evaluate(input2), "2'") // Use math.evaluate to verify that the parsed expression evaluates correctly
-  });
-});
+  })
+})
