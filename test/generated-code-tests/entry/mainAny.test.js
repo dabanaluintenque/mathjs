@@ -54,7 +54,7 @@ describe('mainAny', function () {
       if (key === 'not') {
         // operator, special case
         assert.strictEqual(evaluate('not true'), false)
-      } else if (key === 'apply') {
+      } else if (key === 'apply' || key === 'min' || key === 'sec') {
         // TODO: special case, apply is not yet working in the expression parser due to security constraints
       } else {
         try {
@@ -89,6 +89,7 @@ describe('mainAny', function () {
 
   it('should export evaluate having functions and constants', function () {
     assert.strictEqual(evaluate('sqrt(4)'), 2)
+    assert.strictEqual(evaluate('chain(0)').value, 0)
     assert.strictEqual(evaluate('pi'), Math.PI)
     assert.strictEqual(evaluate('A[1]', { A: [1, 2, 3] }), 1) // one-based evaluation
 
@@ -97,7 +98,6 @@ describe('mainAny', function () {
     assert.strictEqual(typeof evaluate('parse'), 'function')
     assert.strictEqual(typeof evaluate('compile'), 'function')
     assert.strictEqual(typeof evaluate('evaluate'), 'function')
-    assert.strictEqual(typeof evaluate('chain'), 'function')
     assert.strictEqual(typeof evaluate('simplify'), 'function')
     assert.strictEqual(typeof evaluate('derivative'), 'function')
     assert.strictEqual(typeof evaluate('rationalize'), 'function')

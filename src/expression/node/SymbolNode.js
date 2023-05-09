@@ -64,7 +64,7 @@ export const createSymbolNode = /* #__PURE__ */ factory(name, dependencies, ({ m
         return function (scope, args, context) {
           return args[name]
         }
-      } else if (name in math) {
+      } else if (name in math && !isValuelessUnit(name)) {
         return function (scope, args, context) {
           return scope.has(name)
             ? scope.get(name)
@@ -72,7 +72,6 @@ export const createSymbolNode = /* #__PURE__ */ factory(name, dependencies, ({ m
         }
       } else {
         const isUnit = isValuelessUnit(name)
-
         return function (scope, args, context) {
           return scope.has(name)
             ? scope.get(name)

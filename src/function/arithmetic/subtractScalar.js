@@ -51,7 +51,7 @@ export const createAddScalar = /* #__PURE__ */ factory(
         )
         res.fixPrefix = false
         return res
-      }),
+      })
     })
   }
 )
