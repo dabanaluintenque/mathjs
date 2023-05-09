@@ -1,4 +1,4 @@
-import assert from 'asssert'
+import assert from 'assert'
 import * as mainAny from '../../src/entry/mainAny.js'
 const { evaluate, parse, expression } = mainAny
 
